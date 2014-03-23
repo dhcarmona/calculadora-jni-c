@@ -19,9 +19,8 @@ public class CalculadoraJNI extends javax.swing.JFrame {
     private char operacion;
     private int actual;
     private boolean hay_res;
-    
-    
-    
+    private Aritmetica aritmetica;
+  
     
     /**
      * Creates new form CalculadoraJNI
@@ -34,7 +33,8 @@ public class CalculadoraJNI extends javax.swing.JFrame {
         operacion = 0;
         boolean hay_res = false;
         txtPantalla.setText("");
-        
+        aritmetica = new Aritmetica();
+                
     }
 
     /**
@@ -393,6 +393,7 @@ public class CalculadoraJNI extends javax.swing.JFrame {
             hay_res = true;
         }
         else if (actual == 1) {
+            operacion ='/';
             btn_enterActionPerformed(null);
             operandos[0] = Double.parseDouble(txtPantalla.getText());
             actual = 1;
@@ -407,6 +408,7 @@ public class CalculadoraJNI extends javax.swing.JFrame {
             hay_res = true;
         }
         else if (actual == 1) {
+            operacion ='*';
             btn_enterActionPerformed(null);
             operandos[0] = Double.parseDouble(txtPantalla.getText());
             actual = 1;
@@ -421,6 +423,7 @@ public class CalculadoraJNI extends javax.swing.JFrame {
             hay_res = true;
         }
         else if (actual == 1) {
+            operacion ='-';
             btn_enterActionPerformed(null);
             operandos[0] = Double.parseDouble(txtPantalla.getText());
             actual = 1;
@@ -449,25 +452,13 @@ public class CalculadoraJNI extends javax.swing.JFrame {
     private void realizarCalculo(){
         System.out.println("Op1: " + operandos[0] + "Op2: " + operandos[1]);
         switch (operacion){
-            case '+': txtPantalla.setText(String.valueOf(suma(operandos[0], operandos[1]))); actual = 0; break;
-            case '-': txtPantalla.setText(String.valueOf(resta(operandos[0], operandos[1]))); actual = 0; break;
-            case '*': txtPantalla.setText(String.valueOf(mul(operandos[0], operandos[1]))); actual = 0; break;
-            case '/': txtPantalla.setText(String.valueOf(div(operandos[0], operandos[1]))); actual = 0; break;
+            case '+': txtPantalla.setText(String.valueOf(aritmetica.suma(operandos[0], operandos[1]))); actual = 0; break;
+            case '-': txtPantalla.setText(String.valueOf(aritmetica.resta(operandos[0], operandos[1]))); actual = 0; break;
+            case '*': txtPantalla.setText(String.valueOf(aritmetica.mul(operandos[0], operandos[1]))); actual = 0; break;
+            case '/': txtPantalla.setText(String.valueOf(aritmetica.div(operandos[0], operandos[1]))); actual = 0; break;
         }
     }
-    
-    private double suma(double op1, double op2){
-        return op1+op2;
-    }
-    private double resta(double op1, double op2){
-        return op1-op2;
-    }
-    private double mul(double op1, double op2){
-        return op1*op2;
-    }
-    private double div(double op1, double op2){
-        return op1/op2;
-    }
+
     
     private void limpiar(){
         if (hay_res) {
