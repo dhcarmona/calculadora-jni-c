@@ -7,17 +7,12 @@
 package calculadorajni;
 
 public class Aritmetica{
-    public double suma(double op1, double op2){
-        return op1+op2;
-    }
-    public double resta(double op1, double op2){
-        return op1-op2;
-    }
-    public double mul(double op1, double op2){
-        return op1*op2;
-    }
-    public double div(double op1, double op2){
-        return op1/op2;
-    }
-    
+    static {
+      System.loadLibrary("Aritmetica"); // Load native library at runtime
+                                   // hello.dll (Windows) or libhello.so (Unixes)
+   }
+    public native double suma(double op1, double op2);
+    public native double resta(double op1, double op2);
+    public native double mul(double op1, double op2);
+    public native double div(double op1, double op2);
 }
